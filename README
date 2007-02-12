@@ -1,0 +1,26 @@
+= Testly
+
+Testly is a simple, minimal testing library aimed to programmers using FreeBASIC
+to implement agile techniques like TDD (test driven development)
+
+
+== Getting Started
+
+TODO: Write a proper introduction guide of using Testly
+
+
+== Requirements
+
+1. FreeBASIC 0.17 (lastest CVS-build)
+  Testly do extensive use of features only available in lastest CVS builds.
+  You could download the basic (compiler and runtime library) from this url:
+  
+    http://ecowles.dyndns.org/fbdu/
+  
+  Follow the instructions for each platform to use these updates.
+  Thanks to Pritchard and Eric (Windows) and ikkejw (Linux) for these nightly builds.
+
+
+== License
+
+  Testly is released under the MIT license.

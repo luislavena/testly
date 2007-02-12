@@ -1,0 +1,70 @@
+# Each Suite is aimed to be tested for different purposes
+# this file help get that information quickly during the
+# process of create the testing suites.
+
+Suite_Working_All:
+    Setup must be defined
+    Setup must pass
+        one_test_one_assert must pass
+        other_test_two_asserts must pass 
+        assertion count must equal 3
+        failure count must equal 0
+        error count must equal 0
+    Teardown must be defined
+    Teardown must pass
+
+Suite_Failed_Setup
+    Setup must be defined
+    Setup must fail
+        one_test_one_assert must pass
+        assertion count must equal 1
+        failure count must equal 0
+        error count must equal 1
+    Teardown must be defined
+    Teardown must pass
+    
+Suite_Without_Setup
+    Setup must not be defined
+        one_test_one_assert must pass
+        assertion count must equal 1
+        failure count must equal 0
+        error count must equal 0
+    Teardown must pass
+
+Suite_Failed_Teardown
+    Setup must be defined
+    Setup must pass
+        one_test_one_assert must pass
+        assertion count must equal 1
+        failure count must equal 0
+        error count must equal 1
+    Teardown must be defined
+    Teardown must fail
+
+Suite_Without_Teardown
+    Setup must be defined
+    Setup must pass
+        one_test_one_assert must pass
+        assertion count must equal 1
+        failure count must equal 0
+        error count must equal 1
+    Teardown must not be defined
+
+Suite_Without_Setup_Or_Teardown
+    Setup must not be defined
+        one_test_one_assert must pass
+        assertion count must equal 1
+        failure count must equal 0
+        error count must equal 0
+    Teardown must not be defined
+
+Suite_Test_Failed
+    failed_test must not pass
+    assertion count must equal 1
+    failure count must equal 1
+
+Suite_Test_Error
+    error_test must not pass
+    assertion count must equal 1
+    failure count must equal 0
+    error count must equal 1

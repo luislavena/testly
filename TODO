@@ -1,0 +1,43 @@
+Legend:
+[ ] not done
+[+] in progess
+[X] done!
+
+### Implementation
+[+] Simple example about using Testly
+  [ ] Add more documentation about use of the library
+[X] Reduced interface in lib/testly.bi
+
+### Internals
+[X] Linked List
+  [X] TestCases in Suite
+  [X] Suites Collection
+[X] Structure
+  [X] Suite (simple basic information about the suite)
+  [X] Test (the same applies to the test
+  [X] Assertion
+  [X] Helpers that register and add test to each suite
+[+] Helpers
+  [X] Context used to reference current Suite and Test (CURRENT_* ptr)
+  [+] defines for fast access (without using namespace)
+    [+] more defines about kind of assertions
+  [X] Enhance output and report of failures
+  [X] Correct assertion logging (FailureLog)
+  
+### Self-Testing
+[X] Eat our own food!
+  [X] mechanism to exclude a suite from the results (useful to test failed suites)
+  [X] create internal helpers to access count and information about suites, tests and results.
+  [X] Perform testing
+    [X] Based on TESTMAP
+      [X] Evaluate if Suites and Tests are defined and could be selected (select_*)
+      [X] Evaluate if the names of the fixture suites match
+      [X] Evaluate if the fixture suites pass both setup and teardown process.
+      [X] Evaluate failures and errors counts due setup and teardown failures.
+      [X] Evaluate number of assertions performed in each fixture suite and compare them
+      [X] Evaluate the success or failure of the test that comprises each suite in the fixture.
+      [X] Evaluate the quantity of tests of each suite.
+      [X] Evaluate if assertions inside setup/teardown work without glitches.
+    [X] Functional Testing
+      [X] Test Internal Linked List works.
+      [X] Test if helpers do what is supposed to do.
