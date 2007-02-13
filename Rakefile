@@ -26,7 +26,7 @@ require 'rakehelp/freebasic'
 
 PRODUCT_NAME = 'Testly'
 PRODUCT_VERSION = '0.2.1'
-RELEASE_NAME = "#{PRODUCT_NAME.downcase}-#{PRODUCT_VERSION}-lib"
+RELEASE_NAME = "#{PRODUCT_NAME.downcase}-#{PRODUCT_VERSION}-lib-win32"
 
 # global options shared by all the project in this Rakefile
 OPTIONS = { :debug => false, :profile => false, :errorchecking => :ex }
@@ -109,9 +109,13 @@ task :release_lib => ["testly:build", :test] do
   mkdir_p "release/lib/win32"
   mkdir_p "release/inc"
   mkdir_p "release/examples/Testly"
+  mkdir_p "release/docs/Testly"
   cp "lib/libtestly.a", "release/lib/win32"
   cp "lib/testly.bi", "release/inc"
   cp "examples/simple_test.bas", "release/examples/Testly"
+  ['README', 'CHANGELOG', 'MIT-LICENSE'].each do |f|
+    cp f, "release/docs/Testly"
+  end
   chdir "release" do
     sh "zip -r #{RELEASE_NAME}.zip ."
   end
