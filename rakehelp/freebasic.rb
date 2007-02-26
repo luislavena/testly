@@ -210,7 +210,6 @@ module FreeBASIC
         cmdline << "-g" if (@options.has_key?(:debug) && @options[:debug] == true)
         cmdline << "-#{@options[:errorchecking].to_s}" if @options.has_key?(:errorchecking)
         cmdline << "-profile" if (@options.has_key?(:profile) && @options[:profile] == true)
-        cmdline << "-mt" if (@options.has_key?(:mt) && @options[:mt] == true)
         cmdline << "-c #{source}"
         cmdline << "-o #{target}"
         cmdline << "-m #{main}" unless main.nil?
@@ -224,7 +223,6 @@ module FreeBASIC
         cmdline << "fbc"
         cmdline << "-g" if (@options.has_key?(:debug) && @options[:debug] == true)
         cmdline << "-profile" if (@options.has_key?(:profile) && @options[:profile] == true)
-        cmdline << "-mt" if (@options.has_key?(:mt) && @options[:mt] == true)
         cmdline << "-#{@type.to_s}" unless @type == :executable
         cmdline << "-x #{target}"
         cmdline << files << extra_files
@@ -240,11 +238,13 @@ module FreeBASIC
         desc "Remove all compiled files for #{@name}"
         task :clobber do
           # remove compiled and linked file
-          rm compiled_project_file rescue nil #unless @type == :lib
-          rm File.join(@build_path, @complement_file) rescue nil if @type == :dylib
+          rm compiled_project_file rescue nil if File.exist?(compiled_project_file)
+          if @type == :dylib
+            rm File.join(@build_path, @complement_file) rescue nil if File.exist?(File.join(@build_path, @complement_file))
+          end
           
           # remove main file
-          rm compiled_form(@main_file) rescue nil
+          rm compiled_form(@main_file) rescue nil if File.exist?(compiled_form(@main_file))
           
           # now the sources files
           # avoid attempt to remove the file two times (this is a bug in Rake)
@@ -254,7 +254,7 @@ module FreeBASIC
               target = compiled_form(src)
               unless CLOBBER.include?(target)
                 CLOBBER.include(target)
-                rm target rescue nil
+                rm target rescue nil if File.exist?(target)
               end
             end
           end
