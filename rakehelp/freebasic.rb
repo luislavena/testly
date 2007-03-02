@@ -90,7 +90,7 @@ module FreeBASIC
       # as output_name for the project
       def lib(lib_name)
         @type = :lib
-        @output_name = lib_name
+        @output_name = "#{lib_name}"
         @real_file_name = "lib#{lib_name}.a"
       end
       
@@ -197,7 +197,9 @@ module FreeBASIC
       # return the compiled name version of the passed source file (src)
       # compiled_form("test.bas") => "test.o"
       def compiled_form(src)
-        src.ext({ ".bas" => "o", ".rc" => "obj" }[File.extname(src)])
+        unless src.nil?
+          src.ext({ ".bas" => "o", ".rc" => "obj" }[File.extname(src)])
+        end
       end
       
       def compiled_project_file
@@ -244,7 +246,9 @@ module FreeBASIC
           end
           
           # remove main file
-          rm compiled_form(@main_file) rescue nil if File.exist?(compiled_form(@main_file))
+          unless @main_file.nil? || !File.exists?(compiled_form(@main_file))
+            rm compiled_form(@main_file) rescue nil
+          end
           
           # now the sources files
           # avoid attempt to remove the file two times (this is a bug in Rake)
