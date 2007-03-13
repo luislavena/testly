@@ -63,7 +63,7 @@ module FreeBASIC
       @libraries_path = []
       @options = {}
       
-      instance_eval &block
+      instance_eval(&block) if block_given?
       
       do_cleanup
       
@@ -211,6 +211,7 @@ module FreeBASIC
         cmdline << "fbc"
         cmdline << "-g" if (@options.has_key?(:debug) && @options[:debug] == true)
         cmdline << "-#{@options[:errorchecking].to_s}" if @options.has_key?(:errorchecking)
+        cmdline << "-mt" if (@options.has_key?(:mt) && @options[:mt] == true)
         cmdline << "-profile" if (@options.has_key?(:profile) && @options[:profile] == true)
         cmdline << "-c #{source}"
         cmdline << "-o #{target}"
@@ -224,6 +225,7 @@ module FreeBASIC
         cmdline = []
         cmdline << "fbc"
         cmdline << "-g" if (@options.has_key?(:debug) && @options[:debug] == true)
+        cmdline << "-mt" if (@options.has_key?(:mt) && @options[:mt] == true)
         cmdline << "-profile" if (@options.has_key?(:profile) && @options[:profile] == true)
         cmdline << "-#{@type.to_s}" unless @type == :executable
         cmdline << "-x #{target}"
