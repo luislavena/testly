@@ -8,6 +8,8 @@
 #ifndef __TESTLY_BI__
 #define __TESTLY_BI__
 
+#include once "crt/string.bi"
+
 #inclib "testly"
 
 #ifndef BOOLEAN
@@ -49,6 +51,7 @@ end namespace 'Testly
 #define assert_false_error(__value__) _
         Testly.custom_assertion((__value__) = (false), __FILE__, __LINE__, ("{" #__value__ "} is not false."), true)
 
+'# EQU, NEQ (general)
 #define assert_equal(__expected__, __actual__) _
         Testly.custom_assertion((__actual__) = (__expected__), __FILE__, __LINE__, ("expected {" #__expected__ "} but was {" #__actual__ "}"))
 
@@ -60,6 +63,19 @@ end namespace 'Testly
 
 #define assert_not_equal_error(__expected__, __actual__) _
         Testly.custom_assertion((__actual__) <> (__expected__), __FILE__, __LINE__, ("{" #__actual__ "} expected to be != to {" #__expected__ "}"), true)
+
+'# EQU, NEQ (strings)
+#define assert_string_equal(__expected__, __actual__) _
+        Testly.custom_assertion(strcmp((__actual__), (__expected__)) = 0, __FILE__, __LINE__, ("expected {" #__expected__ "} but was {" #__actual__ "}"))
+
+#define assert_string_equal_error(__expected__, __actual__) _
+        Testly.custom_assertion(strcmp((__actual__), (__expected__)) = 0, __FILE__, __LINE__, ("expected {" #__expected__ "} but was {" #__actual__ "}"), true)
+
+#define assert_string_not_equal(__expected__, __actual__) _
+        Testly.custom_assertion(strcmp((__actual__), (__expected__)) <> 0, __FILE__, __LINE__, ("{" #__actual__ "} expected to be != to {" #__expected__ "}"))
+
+#define assert_string_not_equal_error(__expected__, __actual__) _
+        Testly.custom_assertion(strcmp((__actual__), (__expected__)) <> 0, __FILE__, __LINE__, ("{" #__actual__ "} expected to be != to {" #__expected__ "}"), true)
 
 #define assert_pass(__message__) _
         Testly.custom_assertion((true), __FILE__, __LINE__, __message__)

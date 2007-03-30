@@ -18,6 +18,7 @@ namespace Suite1
         assert_false(1<5)
         assert_equal(0,0)
         assert_equal(1,2)
+        assert_string_equal("uno", "dos")
     end sub
     
     sub test3()
