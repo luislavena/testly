@@ -9,15 +9,21 @@ require 'rake/packagetask'
 require 'rakehelp/freebasic'
 
 PRODUCT_NAME = 'Testly'
-PRODUCT_VERSION = '0.2.1'
+PRODUCT_VERSION = '0.2.3'
 RELEASE_NAME = "#{PRODUCT_NAME.downcase}-#{PRODUCT_VERSION}-lib-win32"
 
 # global options shared by all the project in this Rakefile
-OPTIONS = { :debug => false, :profile => false, :errorchecking => :ex }
+OPTIONS = {
+  :debug => false,
+  :profile => false,
+  :errorchecking => :ex,
+  :pedantic => true
+}
 
 OPTIONS[:debug] = true if ENV['DEBUG']
 OPTIONS[:profile] = true if ENV['PROFILE']
 OPTIONS[:errorchecking] = :exx if ENV['EXX']
+OPTIONS[:pedantic] = false if ENV['NOPEDANTIC']
 
 # Package source for distribution
 Rake::PackageTask.new(PRODUCT_NAME.downcase, PRODUCT_VERSION) do |p|

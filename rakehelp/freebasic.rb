@@ -209,6 +209,7 @@ module FreeBASIC
       def fbc_compile(source, target, main = nil)
         cmdline = []
         cmdline << "fbc"
+        cmdline << "-w pedantic" if (@options.has_key?(:pedantic) && @options[:pedantic] == true)
         cmdline << "-g" if (@options.has_key?(:debug) && @options[:debug] == true)
         cmdline << "-#{@options[:errorchecking].to_s}" if @options.has_key?(:errorchecking)
         cmdline << "-mt" if (@options.has_key?(:mt) && @options[:mt] == true)
