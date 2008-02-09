@@ -1,4 +1,4 @@
-*SVN*
+*0.3.0* (2008-02-09)
   * Refactoring Time!
   * Removed Setup/Teardown in favor for a flexible support:
     before_all -> works like setup (executed prior all the tests for that suite)
