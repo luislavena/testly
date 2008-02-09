@@ -1,5 +1,5 @@
 '#--
-'# Copyright (c) 2006-2007 Luis Lavena, Multimedia systems
+'# Copyright (c) 2006-2008 Luis Lavena, Multimedia systems
 '#
 '# This source code is released under the MIT License.
 '# See MIT-LICENSE file for details
