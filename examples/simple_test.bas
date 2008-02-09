@@ -1,13 +1,11 @@
 #include once "testly.bi"
 
 namespace Suite1
-    function setup() as boolean
-        return false
-    end function
+    sub before_each()
+    end sub
     
-    function teardown() as boolean
-        return false
-    end function
+    sub after_each()
+    end sub
     
     sub test1()
         assert_true(1=1)
@@ -27,10 +25,10 @@ namespace Suite1
     end sub
     
     sub register() constructor
-        add_suite("Suite 1", @setup, @teardown)
-        add_test("test 1", @test1)
-        add_test("test 2", @test2)
-        add_test("test 3", @test3)
+        add_suite(Suite1)
+        add_test(test1)
+        add_test(test2)
+        add_test(test3)
     end sub
 end namespace
 

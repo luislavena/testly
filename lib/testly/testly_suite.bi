@@ -26,16 +26,15 @@ namespace Testly
     '# this suite can also be excluded from results and failures/errors collecting process
     '# useful for internal testing.
     type Suite
-        declare constructor(byref as string = "", byref as suite_func_t = 0, byref as suite_func_t = 0)
+        declare constructor(byref as string = "")
         declare destructor()
         
         suite_name as string
         
-        setup_func as suite_func_t
-        setup_failed as boolean
-        
-        teardown_func as suite_func_t
-        teardown_failed as boolean
+        before_all as sub()
+        before_each as sub()
+        after_each as sub()
+        after_all as sub()
         
         declare property tests_count as uinteger
         

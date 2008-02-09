@@ -12,12 +12,9 @@ namespace Testly
     '#############################################################
     '# Suite
     '# default ctor()
-    constructor Suite(byref new_name as string = "", byref new_setup_func as suite_func_t = 0, byref new_teardown_func as suite_func_t = 0)
+    constructor Suite(byref new_name as string = "")
         '# assign the suite properties
         suite_name = new_name
-        
-        setup_func = new_setup_func
-        teardown_func = new_teardown_func
         
         tests_list = new List
     end constructor

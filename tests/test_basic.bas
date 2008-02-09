@@ -16,8 +16,10 @@ namespace Test_Suites
     sub test_suite_properties()
         with *select_suite("Test_Suites")
             assert_equal("Test_Suites", .suite_name)
-            assert_equal(0, .setup_func)
-            assert_equal(0, .teardown_func)
+            assert_equal(0, .before_all)
+            assert_equal(0, .before_each)
+            assert_equal(0, .after_each)
+            assert_equal(0, .after_all)
             assert_equal(5, .tests_count)
         end with
     end sub
@@ -39,11 +41,11 @@ namespace Test_Suites
     end sub
     
     sub register() constructor
-        add_suite("Test_Suites")
-        add_test("test_suite_exist", @test_suite_exist)
-        add_test("test_suite_properties", @test_suite_properties)
-        add_test("test_has_test", @test_has_test)
-        add_test("test_current_suite", @test_current_suite)
-        add_test("test_current_test", @test_current_test)
+        add_suite(Test_Suites)
+        add_test(test_suite_exist)
+        add_test(test_suite_properties)
+        add_test(test_has_test)
+        add_test(test_current_suite)
+        add_test(test_current_test)
     end sub
 end namespace

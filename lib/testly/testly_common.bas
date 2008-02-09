@@ -56,8 +56,9 @@ namespace Testly
     end sub
     
     
-    sub custom_assertion(byval assert_value as boolean, byref filename as string, byval linenumber as uinteger, _
-                            byref message as string, byval fatal_error as boolean = false)
+    function custom_assertion(byval assert_value as boolean, byref filename as string, byval linenumber as uinteger, _
+                                byref message as string, byval fatal_error as boolean = false) as boolean
+        dim result as boolean
         
         '# we must first ensure we aren't doing assertions like crazy,
         '# like outside of run_tests()...
@@ -71,8 +72,10 @@ namespace Testly
                 '# see if it is fatal and adjust the assertion stats
                 if (fatal_error = true) then
                     RUNNING_SUITE->stats.errors += 1
+                    result = false
                 else
                     RUNNING_SUITE->stats.failures += 1
+                    result = true
                 end if
                 
                 '# log it only if CURRENT_SUITE is not excluded
@@ -86,7 +89,9 @@ namespace Testly
                 end if
             end if
         end if
-    end sub
+        
+        return result
+    end function
     
     
     function log_failure(byref suite_name as string, byref test_name as string, byref filename as string, _

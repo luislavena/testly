@@ -15,25 +15,21 @@ namespace Suite_Test_Suites
     dim shared previous_suite as Testly.Suite ptr
     dim shared previous_test as Testly.TestCase ptr
     
-    function setup() as boolean
+    sub before_all()
         previous_suite = Testly.Helpers.CURRENT_SUITE
         previous_test = Testly.Helpers.CURRENT_TEST
-        
-        return true
-    end function
+    end sub
     
-    function teardown() as boolean
+    sub after_all()
         Testly.Helpers.CURRENT_SUITE = previous_suite
         Testly.Helpers.CURRENT_TEST = previous_test
-        
-        return true
-    end function
+    end sub
     
     sub test_suite_add()
         assert_equal(previous_suite, Testly.Helpers.CURRENT_SUITE)
         
         '# try adding a new suite (will be a fake one)
-        add_suite("fake_test_suite")
+        add_suite_ex("fake_test_suite")
         
         assert_not_equal(previous_suite, Testly.Helpers.CURRENT_SUITE)
         assert_equal(0, Testly.Helpers.CURRENT_TEST)
@@ -46,7 +42,7 @@ namespace Suite_Test_Suites
         assert_equal(0, Testly.Helpers.CURRENT_TEST)
         
         '# add the fake test
-        add_test("fake_test", @fake_test)
+        add_test_ex("fake_test", @fake_test)
         
         assert_not_equal(0, Testly.Helpers.CURRENT_TEST)
         assert_not_equal(previous_test, Testly.Helpers.CURRENT_TEST)
@@ -57,8 +53,8 @@ namespace Suite_Test_Suites
     end sub
     
     private sub register() constructor
-        add_suite("Suite_Test_Suites", @setup, @teardown)
-        add_test("test_suite_add", @test_suite_add)
-        add_test("test_test_add", @test_test_add)
+        add_suite(Suite_Test_Suites)
+        add_test(test_suite_add)
+        add_test(test_test_add)
     end sub
 end namespace

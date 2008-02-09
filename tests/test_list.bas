@@ -12,23 +12,13 @@ namespace Suite_Test_List
     dim shared test_list as Testly.List ptr
     dim shared fake_values_ptr_test(0 to 6) as integer => { 1024, 2048, 4096, 8192, 16384, 32768, 65536 }
     
-    function setup() as boolean
-        dim result as boolean
-        
+    sub before_all()
         test_list = new Testly.List
-        if not (test_list = 0) then
-            result = true
-        else
-            result = false
-        end if
-        
-        return result
-    end function
+    end sub
     
-    function teardown() as boolean
+    sub after_all()
         delete test_list
-        return true
-    end function
+    end sub
     
     sub test_node_adding()
         dim old_count as uinteger
@@ -115,14 +105,14 @@ namespace Suite_Test_List
     end sub
     
     private sub register() constructor
-        add_suite("Suite_Test_List", @setup, @teardown)
-        add_test("test_node_adding", @test_node_adding)
-        add_test("test_compare_head", @test_compare_head)
-        add_test("test_compare_tail", @test_compare_tail)
-        add_test("test_traverse_down", @test_traverse_down)
-        add_test("test_traverse_up", @test_traverse_up)
-        add_test("test_node_shifting", @test_node_shifting)
-        add_test("test_shifting_unexistant_node", @test_shifting_unexistant_node)
+        add_suite(Suite_Test_List)
+        add_test(test_node_adding)
+        add_test(test_compare_head)
+        add_test(test_compare_tail)
+        add_test(test_traverse_down)
+        add_test(test_traverse_up)
+        add_test(test_node_shifting)
+        add_test(test_shifting_unexistant_node)
     end sub
     
 end namespace

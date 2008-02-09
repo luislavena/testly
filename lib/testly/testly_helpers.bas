@@ -20,14 +20,14 @@ namespace Testly
         '# these helpers provide functionality to register a new suite 
         '# in the SUITES_LIST and set the references for use with 
         '# add_test_helper
-        function add_suite(byref suite_name as string, byref setup_func as suite_func_t = 0, byref teardown_func as suite_func_t = 0) as boolean
+        function add_suite_ex(byref suite_name as string) as boolean
             dim result as boolean
             dim new_suite as Suite ptr
             
             '# verify if that suite is already registered
             if (find_suite(SUITES_LIST, suite_name) = 0) then
                 '# is not, so add a new one
-                new_suite = new Suite(suite_name, setup_func, teardown_func)
+                new_suite = new Suite(suite_name)
                 
                 SUITES_LIST->add(new_suite)
                 
@@ -43,10 +43,40 @@ namespace Testly
             return result
         end function
         
+        '# easily 'hook' the events that replace setup/teardown functionality
+        '# (due CURRENT_SUITE being hidden to end-user)
+        function add_suite_hook(byref hook_name as string, byref hook_func as sub()) as boolean
+            dim result as boolean
+            
+            if not (CURRENT_SUITE = 0) then
+                select case hook_name
+                    case "before_all":
+                        CURRENT_SUITE->before_all = hook_func
+                        result = true
+                    
+                    case "before_each":
+                        CURRENT_SUITE->before_each = hook_func
+                        result = true
+                    
+                    case "after_each":
+                        CURRENT_SUITE->after_each = hook_func
+                        result = true
+                    
+                    case "after_all":
+                        CURRENT_SUITE->after_all = hook_func
+                        result = true
+                    
+                    case else:
+                        result = false
+                end select
+            end if
+            
+            return result
+        end function
         
         '# add_test_helper will try to add a new test in the CURRENT_SUITE
         '# only if isn't defined already (another test with the same name
-        function add_test(byref test_name as string, byref test_func as test_func_t) as boolean
+        function add_test_ex(byref test_name as string, byref test_func as test_func_t) as boolean
             dim result as boolean
             dim new_test as TestCase ptr
             
@@ -109,24 +139,20 @@ namespace Testly
                 '# clear RUNNING_TEST
                 RUNNING_TEST = 0
                 
-                '# now do initialization of the suite
-                if not (RUNNING_SUITE->setup_func = 0) then
-                    success = RUNNING_SUITE->setup_func()
-                    
-                    if (success = false) then
-                        RUNNING_SUITE->setup_failed = true
-                        '# stats information should always be collected, excluding the suite or not
-                        RUNNING_SUITE->stats.errors += 1
-                        if (RUNNING_SUITE->exclude = false) then
-                            log_failure(RUNNING_SUITE->suite_name, "", "", 0, "Failed suite setup.", true)
-                        end if
-                    end if
+                '# run before_all
+                if not (RUNNING_SUITE->before_all = 0) then
+                    RUNNING_SUITE->before_all()
                 end if
                 
                 '# iterate thru the suite tests
                 test_node = RUNNING_SUITE->tests_list->first
                 do until (test_node = 0)
                     RUNNING_TEST = cast(TestCase ptr, test_node->value)
+                    
+                    '# run before_each now
+                    if not (RUNNING_SUITE->before_each = 0) then
+                        RUNNING_SUITE->before_each()
+                    end if
                     
                     '# record the number of assertions prior executing the test
                     before = RUNNING_SUITE->stats
@@ -159,23 +185,19 @@ namespace Testly
                         end if
                     end with
                     
+                    '# run after_each now
+                    if not (RUNNING_SUITE->after_each = 0) then
+                        RUNNING_SUITE->after_each()
+                    end if
+                    
                     test_node = test_node->next
                 loop
                 '# clear RUNNING_TEST before suite teardown
                 RUNNING_TEST = 0
                 
-                '# now do teardown of the suite
-                if not (RUNNING_SUITE->teardown_func = 0) then
-                    success = RUNNING_SUITE->teardown_func()
-                    
-                    if (success = false) then
-                        RUNNING_SUITE->teardown_failed = true
-                        '# stats information should always be collected, excluding the suite or not
-                        RUNNING_SUITE->stats.errors += 1
-                        if (RUNNING_SUITE->exclude = false) then
-                            log_failure(RUNNING_SUITE->suite_name, "", "", 0, "Failed suite teardown.", true)
-                        end if
-                    end if
+                '# run after_all
+                if not (RUNNING_SUITE->after_all = 0) then
+                    RUNNING_SUITE->after_all()
                 end if
                 
                 '# collect the results prior jumping next suite

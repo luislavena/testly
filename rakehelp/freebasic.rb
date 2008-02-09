@@ -210,8 +210,11 @@ module FreeBASIC
         cmdline = []
         cmdline << "fbc"
         cmdline << "-w pedantic" if (@options.has_key?(:pedantic) && @options[:pedantic] == true)
-        cmdline << "-g" if (@options.has_key?(:debug) && @options[:debug] == true)
-        cmdline << "-#{@options[:errorchecking].to_s}" if @options.has_key?(:errorchecking)
+        if (@options.has_key?(:debug) && @options[:debug] == true)
+          cmdline << "-g"
+        else
+          cmdline << "-#{@options[:errorchecking].to_s}" if @options.has_key?(:errorchecking)
+        end
         cmdline << "-mt" if (@options.has_key?(:mt) && @options[:mt] == true)
         cmdline << "-profile" if (@options.has_key?(:profile) && @options[:profile] == true)
         cmdline << "-c #{source}"

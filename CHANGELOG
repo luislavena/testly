@@ -1,3 +1,17 @@
+*SVN*
+  * Refactoring Time!
+  * Removed Setup/Teardown in favor for a flexible support:
+    before_all -> works like setup (executed prior all the tests for that suite)
+    before_each -> executed before each test
+    after_each -> the opposite of before_each
+    after_all -> works like teardown, get executed after all the tests and the
+      last after_each
+  * Assertions ending with '_error' will exit the test sub if fail
+    (there is no point continue testing, a error is something fatal).
+  * Removed test that are redundant (now we have better coverage).
+  * add_suite and add_test were coded as macro to simplify suite/test
+    registration.
+    
 *0.2.4* (2007-08-13)
   * Added string comparison assertions.
   * made it compatible with 0.18.1 version of FreeBASIC
