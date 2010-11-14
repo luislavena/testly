@@ -23,7 +23,7 @@ Legend:
     [+] more defines about kind of assertions
   [X] Enhance output and report of failures
   [X] Correct assertion logging (FailureLog)
-  
+
 ### Self-Testing
 [X] Eat our own food!
   [X] mechanism to exclude a suite from the results (useful to test failed suites)

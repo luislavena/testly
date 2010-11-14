@@ -20,16 +20,16 @@ namespace Testly
         declare function test_defined(byref as string) as boolean
         declare function select_suite(byref as string) as Suite ptr
         declare function select_test(byref as string) as TestCase ptr
-        
+
         declare function current_suite_name() as string
         declare function current_test_name() as string
-        
+
         '# SELECTED_SUITE
         extern SELECTED_SUITE as Suite ptr
-        
+
         '# SELECTED_TEST
         extern SELECTED_TEST as TestCase ptr
-        
+
     end namespace 'InternalHelpers
 end namespace 'Testly
 

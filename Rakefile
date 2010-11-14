@@ -28,8 +28,8 @@ OPTIONS[:pedantic] = false if ENV['NOPEDANTIC']
 # Package source for distribution
 Rake::PackageTask.new(PRODUCT_NAME.downcase, PRODUCT_VERSION) do |p|
   p.need_zip = true
-  p.package_files.include 'README', 'CHANGELOG', 'TODO', 'MIT-LICENSE', 'Rakefile', 
-                          'doc/**/*', 'lib/**/*.{bas,bi,rc}', 'tests/*.{bas,bi,rc}', 
+  p.package_files.include 'README', 'CHANGELOG', 'TODO', 'MIT-LICENSE', 'Rakefile',
+                          'doc/**/*', 'lib/**/*.{bas,bi,rc}', 'tests/*.{bas,bi,rc}',
                           'examples/**/*.{bas,bi,rc}', 'rakehelp/*.rb'
 end
 
@@ -37,11 +37,11 @@ end
 project_task :testly do
   lib         'testly'
   build_to    'lib'
-  
+
   search_path 'lib'
-  
+
   source      "lib/**/*.bas"
-  
+
   option      OPTIONS
 end
 
@@ -49,15 +49,15 @@ task "all_tests:build" => "testly:build"
 project_task :all_tests do
   executable  :all_tests
   build_to    'tests'
-  
+
   search_path 'lib'
   lib_path    'lib'
-  
+
   main        'tests/all_tests.bas'
-  
+
   # this temporally fix the inverse namespace ctors of FB
   source      Dir.glob("tests/*.bas").reverse
-  
+
   library     'testly'
 
   option      OPTIONS
@@ -77,10 +77,10 @@ task "sample:build" => "testly:build"
 project_task :sample do
   executable  :simple_test
   build_to    'examples'
-  
+
   search_path 'lib'
   lib_path    'lib'
-  
+
   main        'examples/simple_test.bas'
   library     'testly'
 
@@ -113,5 +113,5 @@ end
 
 task :clobber_lib do
   rm_r "release" rescue nil
-end 
+end
 task :clobber => :clobber_lib

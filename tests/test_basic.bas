@@ -12,7 +12,7 @@ namespace Test_Suites
     sub test_suite_exist()
         assert_true(suite_defined("Test_Suites"))
     end sub
-    
+
     sub test_suite_properties()
         with *select_suite("Test_Suites")
             assert_equal("Test_Suites", .suite_name)
@@ -23,7 +23,7 @@ namespace Test_Suites
             assert_equal(5, .tests_count)
         end with
     end sub
-    
+
     sub test_has_test()
         with *select_suite("Test_Suites")
             assert_true(test_defined("test_has_test"))
@@ -31,15 +31,15 @@ namespace Test_Suites
             assert_false(test_defined("test_unknown"))
         end with
     end sub
-    
+
     sub test_current_suite()
         assert_equal("Test_Suites", current_suite_name())
     end sub
-    
+
     sub test_current_test()
         assert_equal("test_current_test", current_test_name())
     end sub
-    
+
     sub register() constructor
         add_suite(Test_Suites)
         add_test(test_suite_exist)

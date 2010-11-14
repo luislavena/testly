@@ -18,7 +18,7 @@ namespace Testly
         value as any ptr
         next as ListNode ptr
     end type
-    
+
     '# Simple implementation of a Linked List
     '# this mimic the ruby Array class
     '# add will put the new element at last
@@ -29,21 +29,21 @@ namespace Testly
     '# the nodes.
     type List
         declare destructor()
-        
+
         first as ListNode ptr
         last as ListNode ptr
-        
+
         declare sub add(byval as any ptr)
         declare function shift() as any ptr
-        
+
         declare property count as uinteger
-        
+
         declare sub clear()
-        
+
         private:
             _counter as uinteger
     end type
-    
+
 end namespace 'Testly
 
 #endif '__TESTLY_LIST_BI__

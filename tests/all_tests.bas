@@ -7,7 +7,7 @@
 
 #include once "testly.bi"
 
-'# the code in this module runs after all 
+'# the code in this module runs after all
 '# the other modules have "registered" their suites.
 
 '# evaluate the result from run_tests() to

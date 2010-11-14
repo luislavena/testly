@@ -11,20 +11,20 @@
   * Removed test that are redundant (now we have better coverage).
   * add_suite and add_test were coded as macro to simplify suite/test
     registration.
-    
+
 *0.2.4* (2007-08-13)
   * Added string comparison assertions.
   * made it compatible with 0.18.1 version of FreeBASIC
-  
+
 *0.2.1* (2007-02-12)
   * Re-license code under MIT.
-  
+
 *0.2.0* (2006-12-30)
   * Enhanced internal testing of the library
-  * Assertion syntax swapped: assert_equal(expected, actual), 
+  * Assertion syntax swapped: assert_equal(expected, actual),
     corrected internal tests to reflect this change
-  * Added error reporting to the OS (using end). 
-    This will generate rake task to abort 
+  * Added error reporting to the OS (using end).
+    This will generate rake task to abort
     (useful by cerberus -- continous build -- to detect a build failure).
   * Changed internals on how current suite and test is referenced.
     Split helpers from running implementation

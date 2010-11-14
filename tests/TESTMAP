@@ -6,7 +6,7 @@ Suite_Working_All:
     Setup must be defined
     Setup must pass
         one_test_one_assert must pass
-        other_test_two_asserts must pass 
+        other_test_two_asserts must pass
         assertion count must equal 3
         failure count must equal 0
         error count must equal 0
@@ -22,7 +22,7 @@ Suite_Failed_Setup
         error count must equal 1
     Teardown must be defined
     Teardown must pass
-    
+
 Suite_Without_Setup
     Setup must not be defined
         one_test_one_assert must pass

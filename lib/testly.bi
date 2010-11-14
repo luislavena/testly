@@ -24,7 +24,7 @@ namespace Testly
 
     declare function custom_assertion(byval as boolean, byref as string, byval as uinteger, _
                                         byref as string, byval as boolean = false) as boolean
-    
+
     '# Helpers simplify the addition of suites and new test to each suite.
     '# you could call them directly, but is recomended (and shorter)
     '# use the defines below in this file.
@@ -33,13 +33,13 @@ namespace Testly
         declare function add_suite_hook(byref as string, byref as sub()) as boolean
         declare function add_test_ex(byref as string, byref as test_func_t) as boolean
         declare function run_tests() as boolean
-        
+
         #macro add_if_defined(__sub__)
             #if defined(__sub__)
             Testly.Helpers.add_suite_hook(#__sub__, @##__sub__)
             #endif
         #endmacro
-        
+
         '# add only defined before_ and after_ hooks
         #macro add_suite(__suite__)
             Testly.Helpers.add_suite_ex(#__suite__)
@@ -48,7 +48,7 @@ namespace Testly
             add_if_defined(after_all)
             add_if_defined(after_each)
         #endmacro
-        
+
         '# Helper to simplify adding tests
         #macro add_test(__test_name__)
             #if defined(__test_name__)

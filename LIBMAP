@@ -21,16 +21,16 @@ testly_case:
 testly_common:
 (n) Testly (ctor, dtor)
     (t) FailureLog
-    
+
     (e) SUITES_LIST
     (e) FAILURES_LIST
-    
+
     (e) RUNNING_TEST
     (e) RUNNING_SUITE
-    
+
     (f) log_failure(...)
     (f) custom_assertion(...)
-    
+
     (f) find_suite(...)
     (f) find_test(...)
 
@@ -39,7 +39,7 @@ testly_helpers:
     (n) Helpers
         (e) CURRENT_TEST
         (e) CURRENT_SUITE
-        
+
         (f) add_suite(...)
         (f) add_test(...)
         (f) run_tests()
@@ -49,11 +49,11 @@ testly_internals:
     (n) InternalHelpers
         (e) SELECTED_SUITE
         (e) SELECTED_TEST
-        
+
         (f) suite_defined(...)
         (f) test_defined(...)
         (f) select_suite(...)
         (f) select_test(...)
-        
+
         (f) current_suite_name(...)
         (f) current_test_name(...)

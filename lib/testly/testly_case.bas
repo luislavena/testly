@@ -16,5 +16,5 @@ namespace Testly
         test_name = new_name
         test_func = new_test_func
     end constructor
-    
+
 end namespace 'Testly

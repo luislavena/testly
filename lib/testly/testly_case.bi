@@ -14,13 +14,12 @@ namespace Testly
     '# TestCase represent each test inside a Suite.
     type TestCase
         declare constructor(byref as string = "", byref as test_func_t = 0)
-        
+
         test_name as string
         test_func as test_func_t
         test_passed as boolean
     end type
-    
+
 end namespace 'Testly
 
 #endif '__TESTLY_CASE_BI__
-

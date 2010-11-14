@@ -20,7 +20,7 @@ namespace Suite_Test_Before
         assert_equal(1, Suite_Working_All.before_all_count)
         assert_equal(2, Suite_Working_All.before_each_count)
     end sub
-    
+
     private sub register() constructor
         add_suite(Suite_Test_Before)
         add_test(test_before_count)
@@ -32,7 +32,7 @@ namespace Suite_Test_After
         assert_equal(1, Suite_Working_All.after_all_count)
         assert_equal(2, Suite_Working_All.after_each_count)
     end sub
-    
+
     private sub register() constructor
         add_suite(Suite_Test_After)
         add_test(test_after_count)
