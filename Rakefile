@@ -16,14 +16,13 @@ RELEASE_NAME = "#{PRODUCT_NAME.downcase}-#{PRODUCT_VERSION}-lib-win32"
 OPTIONS = {
   :debug => false,
   :profile => false,
-  :errorchecking => :ex,
-  :pedantic => true
+  :errorchecking => :ex
 }
 
 OPTIONS[:debug] = true if ENV['DEBUG']
 OPTIONS[:profile] = true if ENV['PROFILE']
 OPTIONS[:errorchecking] = :exx if ENV['EXX']
-OPTIONS[:pedantic] = false if ENV['NOPEDANTIC']
+OPTIONS[:pedantic] = true if ENV['PEDANTIC']
 
 # Package source for distribution
 Rake::PackageTask.new(PRODUCT_NAME.downcase, PRODUCT_VERSION) do |p|
