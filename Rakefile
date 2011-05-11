@@ -9,7 +9,7 @@ require 'rake/packagetask'
 require 'rakehelp/freebasic'
 
 PRODUCT_NAME = 'Testly'
-PRODUCT_VERSION = '0.3.0'
+PRODUCT_VERSION = '0.3.1'
 RELEASE_NAME = "#{PRODUCT_NAME.downcase}-#{PRODUCT_VERSION}-lib-win32"
 
 # global options shared by all the project in this Rakefile
