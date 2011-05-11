@@ -1,3 +1,6 @@
+*0.3.1* (2011-05-10)
+  * Internal: build without pedantic warnings
+
 *0.3.0* (2008-02-09)
   * Refactoring Time!
   * Removed Setup/Teardown in favor for a flexible support:
